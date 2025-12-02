@@ -1,5 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import DownloadCard from "../components/DownloadCard";
 
 function DownloadsScreen() {
     return (
@@ -15,43 +16,41 @@ function DownloadsScreen() {
 
             <Row className="mt-4">
                 <Col md={6}>
-                    <Card className="mb-4">
-                        <Card.Body>
-                            <h3>Zaopin Software Suite</h3>
-                            <p className="text-muted">Version 2.1.0 | Released: November 2025</p>
-                            <p className="mt-3">
-                                Complete software package for customizing your Zaopin mouse settings including:
-                            </p>
-                            <ul>
-                                <li>DPI adjustment (up to 26000)</li>
-                                <li>Polling rate configuration</li>
-                                <li>RGB lighting customization</li>
-                                <li>Button remapping</li>
-                                <li>Macro programming</li>
-                            </ul>
-                            <Button variant="primary" className="mt-3">Download for Windows</Button>{' '}
-                            <Button variant="outline-primary" className="mt-3">Download for macOS</Button>
-                        </Card.Body>
-                    </Card>
+                    <DownloadCard
+                        title="Zaopin Software Suite"
+                        version="Version 2.1.0"
+                        releaseDate="November 2025"
+                        description="Complete software package for customizing your Zaopin mouse settings including:"
+                        features={[
+                            "DPI adjustment (up to 26000)",
+                            "Polling rate configuration",
+                            "RGB lighting customization",
+                            "Button remapping",
+                            "Macro programming"
+                        ]}
+                        buttons={[
+                            { text: "Download for Windows", variant: "primary" },
+                            { text: "Download for macOS", variant: "outline-primary" }
+                        ]}
+                    />
                 </Col>
 
                 <Col md={6}>
-                    <Card className="mb-4">
-                        <Card.Body>
-                            <h3>Firmware Updates</h3>
-                            <p className="text-muted">Latest firmware for all Zaopin devices</p>
-                            <p className="mt-3">
-                                Keep your mouse up to date with the latest performance improvements and bug fixes.
-                            </p>
-                            <ul>
-                                <li>Z1 PRO Firmware v1.5.2</li>
-                                <li>Z2 4K Firmware v1.4.8</li>
-                                <li>Improved sensor accuracy</li>
-                                <li>Enhanced battery life</li>
-                            </ul>
-                            <Button variant="primary" className="mt-3">Check for Updates</Button>
-                        </Card.Body>
-                    </Card>
+                    <DownloadCard
+                        title="Firmware Updates"
+                        version={null}
+                        releaseDate={null}
+                        description="Keep your mouse up to date with the latest performance improvements and bug fixes."
+                        features={[
+                            "Z1 PRO Firmware v1.5.2",
+                            "Z2 4K Firmware v1.4.8",
+                            "Improved sensor accuracy",
+                            "Enhanced battery life"
+                        ]}
+                        buttons={[
+                            { text: "Check for Updates", variant: "primary" }
+                        ]}
+                    />
                 </Col>
             </Row>
 
