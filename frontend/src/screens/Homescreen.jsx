@@ -1,12 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Product from "../components/Product";
 import HeroSection from "../components/HeroSection";
 import SectionHeader from "../components/SectionHeader";
-import products from "../products"; 
 import { Col, Row, Container } from "react-bootstrap";
 import "../homescreen.css";
 
 function HomeScreen() {
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const apiUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
+                const response = await fetch(`${apiUrl}/api/products/`);
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                
+                const data = await response.json();
+                setProducts(data);
+                setLoading(false);
+            } catch (err) {
+                setError(err.message);
+                setLoading(false);
+            }
+        };
+
+        fetchProducts();
+    }, []);
+
     return (
         <>
             {/* Hero Section */}
@@ -18,6 +43,8 @@ function HomeScreen() {
             {/* Products Section */}
             <Container className="products-section">
                 <SectionHeader title="Our Products" />
+                {loading && <p className="text-center">Loading products...</p>}
+                {error && <p className="text-center text-danger">Error: {error}</p>}
                 <Row>
                     {products.map((product) => (
                         <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
